@@ -69,48 +69,50 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         ArrayList<Integer> numbers = new ArrayList<>();
         ArrayList<Integer> primes = new ArrayList<>();
-        System.out.print("Input: ");
-        String inputStr = input.nextLine();
-        if (!inputStr.matches("\\d+")) { 
-            System.out.println("Error");
-        } else {
-            int num = Integer.parseInt(inputStr);
-            if (num > 50000) { 
-                System.out.println("Input number is greater than 50,000.");
-            } else {
-                numbers.add(num);
-                if (isPrime(num)) { 
-                    primes.add(num);
-                }
-                System.out.print("number : ");
-                for (int n : numbers) {
-                    System.out.print(n + " ");
-                }
-                System.out.println();
-                System.out.print("prime number : ");
-                for (int p : primes) {
-                    System.out.print(p + " ");
-                }
-                System.out.println();
-            }
-        }
-    }
 
-    public static boolean isPrime(int num) {
-        if (num <= 1) {
-            return false;
+        System.out.print("Input : ");
+        String input = scanner.nextLine();
+        if (!input.matches("\\d+")) {
+            System.out.println("Error");
+            return;
         }
-        for (int i = 2; i <= Math.sqrt(num); i++) {
-            if (num % i == 0) {
-                return false;
+
+        int number = Integer.parseInt(input);
+        if (number > 50000) {
+            System.out.println("Input number is greater than 50,000.");
+            return;
+        }
+
+        for (int i = 1; i <= number; i++) {
+            boolean isPrime = true;
+            for (int j = 2; j < i; j++) {
+                if (i % j == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+            if (isPrime) {
+                primes.add(i);
+            } else {
+                numbers.add(i);
             }
         }
-        return true;
+
+        System.out.print("number : ");
+        for (int n : numbers) {
+            System.out.print(n + " ");
+        }
+        System.out.println();
+
+        System.out.print("prime number : ");
+        for (int p : primes) {
+            System.out.print(p + " ");
+        }
+        System.out.println();
     }
 }
 ```
