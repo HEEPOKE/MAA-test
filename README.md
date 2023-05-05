@@ -116,3 +116,9 @@ public class Main {
     }
 }
 ```
+
+- can run for question 2
+
+```bash
+java Main.java
+```
