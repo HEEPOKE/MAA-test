@@ -29,3 +29,88 @@ WHERE c.FCCODE IN ('51-01824', '9999')
 GROUP BY c.FCCODE, c.FCNAME, p.FCCODE, p.FCNAME
 ORDER BY FNQTY ASC
 ```
+
+### Function Question
+
+- 1
+
+```bash
+    public static int calculateFee(int value) {
+        final int BASE_FEE = 50;
+        final int FEE_TIER_1 = 5;
+        final int FEE_TIER_2 = 10;
+        final int FEE_TIER_3 = 30;
+        final int FEE_TIER_4 = 50;
+
+        int fee = BASE_FEE;
+        if (value > 0 && value <= 10) {
+            fee += value * FEE_TIER_1; 
+        } else if (value <= 20) {
+            fee += 10 * FEE_TIER_1; 
+            fee += (value - 10) * FEE_TIER_2; 
+        } else if (value <= 30) {
+            fee += 10 * FEE_TIER_1; 
+            fee += 10 * FEE_TIER_2; 
+            fee += (value - 20) * FEE_TIER_3; 
+        } else if (value > 30) {
+            fee += 10 * FEE_TIER_1; 
+            fee += 10 * FEE_TIER_2; 
+            fee += 10 * FEE_TIER_3; 
+            fee += (value - 30) * FEE_TIER_4;
+        }
+        return fee;
+    }
+```
+
+- 2
+
+```bash
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        ArrayList<Integer> numbers = new ArrayList<>();
+        ArrayList<Integer> primes = new ArrayList<>();
+        System.out.print("Input: ");
+        String inputStr = input.nextLine();
+        if (!inputStr.matches("\\d+")) { 
+            System.out.println("Error");
+        } else {
+            int num = Integer.parseInt(inputStr);
+            if (num > 50000) { 
+                System.out.println("Input number is greater than 50,000.");
+            } else {
+                numbers.add(num);
+                if (isPrime(num)) { 
+                    primes.add(num);
+                }
+                System.out.print("number : ");
+                for (int n : numbers) {
+                    System.out.print(n + " ");
+                }
+                System.out.println();
+                System.out.print("prime number : ");
+                for (int p : primes) {
+                    System.out.print(p + " ");
+                }
+                System.out.println();
+            }
+        }
+    }
+
+    public static boolean isPrime(int num) {
+        if (num <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+```
